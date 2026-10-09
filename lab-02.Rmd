@@ -83,11 +83,21 @@ plastic_data_all %>% head(n = 10)
 ```{r Ex1, message = FALSE}
 # Write your code here to answer exercise 1
 
+coastal <- read_csv(
+  "data/mismanaged-plastic-waste-per-capita.csv"
+)
 
+regions <- readxl::read_excel(
+  "data/UN_country_region.xlsx"
+)
 
+coastal %>%
+  left_join(
+    regions %>% select(code, region),
+    by = "code"
+  ) %>%
+  count(region, sort = TRUE)
 ```
-
-
 
 ### Ex 2.
 
